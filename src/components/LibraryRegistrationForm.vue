@@ -9,7 +9,8 @@ const formData = ref({
   confirmPassword: '',
   isAustralian: false,
   reason: '',
-  gender: ''
+  gender: '',
+  suburb: 'Clayton'
 })
 
 const submittedCards = ref([])
@@ -78,13 +79,14 @@ const validatePassword = (blur) => {
  * Confirm password validation function that checks if the password and confirm password fields match.
  * @param blur: boolean - If true, the function will display an error message if the passwords do not match.
  */
- const validateConfirmPassword = (blur) => {
+const validateConfirmPassword = (blur) => {
   if (formData.value.password !== formData.value.confirmPassword) {
     if (blur) errors.value.confirmPassword = 'Passwords do not match.'
   } else {
     errors.value.confirmPassword = null
   }
 }
+
 </script>
 
 <template>
@@ -177,7 +179,15 @@ const validatePassword = (blur) => {
               id="reason"
               rows="3"
               v-model="formData.reason"
+              @blur="() => validateReason(true)"
+              @input="() => validateReason(false)"
             ></textarea>
+            <div v-if="formData.reason.toLowerCase().includes('friend')" class="text-success">Great to have a friend!</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="reason" class="form-label">Suburb</label>
+            <input type="text" class="form-control" id="suburb" v-bind:value="formData.suburb" />
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
