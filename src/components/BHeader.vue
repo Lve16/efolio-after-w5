@@ -5,10 +5,22 @@
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">Home (Week 5)</a>
+          <router-link to="/" class="nav-link" active-class="active" aria-current="page"
+            >Home (Week 5)</router-link>
         </li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Contact us</a></li>
+        <li class="nav-item">
+          <router-link to="/about" class="nav-link" active-class="active">
+            About
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="!isLoggedIn">
+          <router-link to="/login" class="nav-link" active-class="active">
+            Login
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="isLoggedIn">
+          <button @click="logout" class="nav-link btn btn-link">Logout</button>
+        </li>
       </ul>
     </header>
   </div>
@@ -50,3 +62,26 @@
   outline: 0;
 }
 </style>
+
+<script>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+export default {
+  setup() {
+    const router = useRouter();
+    const isLoggedIn = ref(!!localStorage.getItem('loggedInUser'));
+
+    const logout = () => {
+      localStorage.removeItem('loggedInUser'); 
+      router.push('/'); 
+      isLoggedIn.value = false;
+    };
+
+    return {
+      isLoggedIn,
+      logout
+    };
+  }
+};
+</script>
