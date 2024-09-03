@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <h1 class="title-font">Login</h1>
-    <form @submit.prevent="loginUser">
+    <!-- <form @submit.prevent="loginUser">
       <div>
         <label for="username">Username:</label>
         <input type="text" v-model="formData.username" placeholder="Username" required />
@@ -12,42 +12,42 @@
       </div>
 
       <button type="submit">Login</button>
-    </form>
+    </form> -->
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';  
+// import { ref } from 'vue';
+// import { useRouter } from 'vue-router';  
 
-export default {
-  setup() {
-    const formData = ref({
-      username: '',
-      password: ''
-    });
+// export default {
+//   setup() {
+//     const formData = ref({
+//       username: '',
+//       password: ''
+//     });
 
-    const givenUsername = 'vincent';
-    const givenPassword = 'qqqqqq';
+//     const givenUsername = 'vincent';
+//     const givenPassword = 'qqqqqq';
 
-    const router = useRouter();  
+//     const router = useRouter();  
 
-    const loginUser = () => {
-      if (formData.value.username === givenUsername && formData.value.password === givenPassword) {
-        alert('Login successfully!');
-        localStorage.setItem('loggedInUser', formData.value.username); 
-        router.push('/about');  
-      } else {
-        alert('Invalid username or password');
-      }
-    };
+//     const loginUser = () => {
+//       if (formData.value.username === givenUsername && formData.value.password === givenPassword) {
+//         alert('Login successfully!');
+//         localStorage.setItem('loggedInUser', formData.value.username); 
+//         router.push('/about');  
+//       } else {
+//         alert('Invalid username or password');
+//       }
+//     };
 
-    return {
-      formData,
-      loginUser
-    };
-  }
-};
+//     return {
+//       formData,
+//       loginUser
+//     };
+//   }
+// };
 </script>
 
 <style scoped>
