@@ -62,11 +62,15 @@ const register = () => {
         role: role.value
       });
 
+      await auth.signOut();
+
       alert("Successfully register!")
       console.log("Firebase Register Successful!");
       router.push("/FireLogin");
     } catch (error) {
       console.log(error.code);
+      console.log("An error occurred:", error);
+      console.log("Error message:", error.message);
     }
   };
   </script>

@@ -152,6 +152,7 @@ export default {
       loggedIn: false,
       isAdmin: false,
       currentUser: null, // store current user information
+      userRole: null,    // store user role
     };
   },
   async created() {
@@ -165,7 +166,9 @@ export default {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          this.isAdmin = docSnap.data().role === "admin";
+          const role = docSnap.data().role;
+          this.isAdmin = role === "admin";
+          this.userRole = role;  // store user role
         } else {
           console.log("No such document!");
         }
@@ -173,6 +176,7 @@ export default {
         this.loggedIn = false;
         this.isAdmin = false;
         this.currentUser = null; // clear current user information
+        this.userRole = null;
       }
     });
   },
@@ -180,6 +184,7 @@ export default {
     logout() {
       if (this.currentUser) {
         console.log("Current User before logout:", this.currentUser.email);
+        console.log("Current User role is:", this.userRole);
       } else {
         console.log("No user is currently logged in.");
       }
@@ -189,6 +194,7 @@ export default {
         this.$router.push('/');
         console.log("User has been logged out.");
         this.currentUser = null; // clear current user information
+        this.userRole = null; 
       });
     }
   }

@@ -94,7 +94,7 @@ import Login from '../views/Login.vue'
 import FirebaseSignin from '../views/FirebaseSignin.vue'
 import FirebaseRegiter from '../views/FirebaseRegister.vue'
 import Admin from '../views/Admin.vue'
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 const routes = [
@@ -140,7 +140,22 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const auth = getAuth();
   const db = getFirestore();
-  const user = auth.currentUser;
+  let user = auth.currentUser;
+
+  if (!user) {
+    await new Promise((resolve) => {
+      onAuthStateChanged(auth, (u) => {
+        user = u;
+        resolve();
+      });
+    });
+  }
+
+  if (user && (to.path === '/FireLogin' || to.path === '/FireRegister')) {
+    console.log("User is already logged in, redirecting to home page.");
+    alert("Already login!")
+    return next('/');
+  }
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!user) {
@@ -159,6 +174,7 @@ router.beforeEach(async (to, from, next) => {
             if (userRole === 'admin') {
               return next(); 
             } else {
+              alert("not admin, accessed denied!")
               console.log("User role is not admin, redirecting to home page.");
               return next('/'); 
             }
