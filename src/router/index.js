@@ -96,6 +96,8 @@ import FirebaseRegiter from '../views/FirebaseRegister.vue'
 import Admin from '../views/Admin.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import AddBookView from '../views/AddBookView.vue'
+import EditBookView from '../views/EditBookView.vue'
 
 const routes = [
   {
@@ -129,6 +131,18 @@ const routes = [
     name: 'Admin',
     component: Admin,
     meta: { requiresAuth: true, requiresAdmin: true } 
+  },
+  {
+    path: '/addbook',
+    name: 'AddBook',
+    component: AddBookView,
+    meta: { requiresAuth: true } 
+  },
+  {
+    path: '/editbook',
+    name: 'EditBook',
+    component: EditBookView,
+    meta: { requiresAuth: true } 
   }
 ]
 

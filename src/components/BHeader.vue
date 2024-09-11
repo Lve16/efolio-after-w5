@@ -96,6 +96,16 @@
           </router-link>
         </li>
         <li class="nav-item" v-if="loggedIn">
+          <router-link to="/addbook" class="nav-link" active-class="active">
+            Add Book
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="loggedIn">
+          <router-link to="/editbook" class="nav-link" active-class="active">
+            Edit Book
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="loggedIn">
           <button @click="logout" class="nav-link btn btn-link">Logout</button>
         </li>
       </ul>
