@@ -36,13 +36,35 @@ export default {
                     return;
                 }
 
-                await addDoc(collection(db,'books'), {
+                // await addDoc(collection(db,'books'), {
+                //     isbn: isbnNumber,
+                //     name: name.value
+                // });
+                // isbn.value = '';
+                // name.value = '';
+                // alert('Book added successfully!')
+               
+                const response = await fetch('https://addbookwithuppercase-3hworouzva-uc.a.run.app', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
                     isbn: isbnNumber,
-                    name: name.value
+                    name: name.value,
+                  }),
                 });
-                isbn.value = '';
-                name.value = '';
-                alert('Book added successfully!')
+
+                const result = await response.json();
+
+                if (response.ok) {
+                  alert(`Book added successfully: ${JSON.stringify(result.data)}`);
+                  isbn.value = '';
+                  name.value = '';
+                } else {
+                  console.error(result);
+                  alert(`Error adding book: ${result}`);
+                }
             } catch (error) {
                 console.error('Error adding book: ', error);
             }

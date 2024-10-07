@@ -98,6 +98,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import AddBookView from '../views/AddBookView.vue'
 import EditBookView from '../views/EditBookView.vue'
+import GetBookCountView from '../views/GetBookCountView.vue'
+import WeatherView from '../views/WeatherView.vue'
+import CountBookAPI from '../views/CountBookAPI.vue'
+import GetAllBookAPI from '../views/GetAllBookAPI.vue'
 
 const routes = [
   {
@@ -142,6 +146,30 @@ const routes = [
     path: '/editbook',
     name: 'EditBook',
     component: EditBookView,
+    meta: { requiresAuth: true } 
+  },
+  {
+    path: '/getbookcount',
+    name: 'GetBookCount',
+    component: GetBookCountView,
+    meta: { requiresAuth: true } 
+  },
+  {
+    path: '/weathercheck',
+    name: 'WeatherCheck',
+    component: WeatherView,
+    meta: { requiresAuth: true } 
+  },
+  {
+    path: '/countbookapi',
+    name: 'CountBookAPI',
+    component: CountBookAPI,
+    meta: { requiresAuth: true } 
+  },
+  {
+    path: '/getallbookapi',
+    name: 'GetAllBookAPI',
+    component: GetAllBookAPI,
     meta: { requiresAuth: true } 
   }
 ]

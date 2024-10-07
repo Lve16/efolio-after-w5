@@ -106,6 +106,26 @@
           </router-link>
         </li>
         <li class="nav-item" v-if="loggedIn">
+          <router-link to="/getbookcount" class="nav-link" active-class="active">
+            Get Book Count
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="loggedIn">
+          <router-link to="/weathercheck" class="nav-link" active-class="active">
+            Get Weather
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="loggedIn">
+          <router-link to="/countbookapi" class="nav-link" active-class="active">
+            Count Book API
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="loggedIn">
+          <router-link to="/getallbookapi" class="nav-link" active-class="active">
+            Get All Book API
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="loggedIn">
           <button @click="logout" class="nav-link btn btn-link">Logout</button>
         </li>
       </ul>
